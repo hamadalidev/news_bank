@@ -1,0 +1,174 @@
+name: Articles
+description: |-
+
+  APIs for managing news articles
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/articles
+    metadata:
+      groupName: Articles
+      groupDescription: |-
+
+        APIs for managing news articles
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List articles'
+      description: 'Get a paginated list of news articles with optional search, filtering, and sorting capabilities.'
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        name: search
+        description: 'Search term to filter articles by title or description.'
+        required: false
+        example: technology
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      category:
+        name: category
+        description: 'Filter articles by category ID.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      author:
+        name: author
+        description: 'Filter articles by author ID.'
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      source:
+        name: source
+        description: 'Filter articles by news source ID.'
+        required: false
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      column:
+        name: column
+        description: 'Field to sort by. Must be one of: id, title, published_at.'
+        required: false
+        example: published_at
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      dir:
+        name: dir
+        description: 'Sort direction. Must be one of: asc, desc.'
+        required: false
+        example: desc
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      length:
+        name: length
+        description: 'Number of items per page (default: 10).'
+        required: false
+        example: 20
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      search: technology
+      category: 1
+      author: 2
+      source: 3
+      column: published_at
+      dir: desc
+      length: 20
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Success",
+            "data": {
+              "list": [
+                {
+                  "id": 1,
+                  "title": "Breaking: Technology News",
+                  "description": "Latest developments in technology sector...",
+                  "url": "https://example.com/article/1",
+                  "published_at": "2025-10-19T10:30:00Z",
+                  "source": {
+                    "id": 1,
+                    "name": "Tech Daily"
+                  },
+                  "category": {
+                    "id": 1,
+                    "name": "Technology"
+                  },
+                  "author": {
+                    "id": 1,
+                    "name": "John Smith"
+                  }
+                },
+                {
+                  "id": 2,
+                  "title": "Business Market Update",
+                  "description": "Current market trends and analysis...",
+                  "url": "https://example.com/article/2",
+                  "published_at": "2025-10-19T09:15:00Z",
+                  "source": {
+                    "id": 2,
+                    "name": "Business News"
+                  },
+                  "category": {
+                    "id": 2,
+                    "name": "Business"
+                  },
+                  "author": {
+                    "id": 2,
+                    "name": "Jane Doe"
+                  }
+                }
+              ],
+              "pagination": {
+                "total": 150,
+                "count": 20,
+                "per_page": 20,
+                "current_page": 1,
+                "total_pages": 8
+              }
+            }
+          }
+        headers: []
+        description: success
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

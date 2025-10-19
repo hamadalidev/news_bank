@@ -1,0 +1,111 @@
+name: Authors
+description: |-
+
+  APIs for managing authors
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/authors
+    metadata:
+      groupName: Authors
+      groupDescription: |-
+
+        APIs for managing authors
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List authors'
+      description: 'Get a paginated list of authors with optional search and sorting capabilities.'
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        name: search
+        description: 'Search term to filter authors by name.'
+        required: false
+        example: john
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      column:
+        name: column
+        description: 'Field to sort by. Must be one of: id, name.'
+        required: false
+        example: name
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      dir:
+        name: dir
+        description: 'Sort direction. Must be one of: asc, desc.'
+        required: false
+        example: asc
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      length:
+        name: length
+        description: 'Number of items per page (default: 10).'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      search: john
+      column: name
+      dir: asc
+      length: 15
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Success",
+            "data": {
+              "list": [
+                {
+                  "id": 1,
+                  "name": "John Doe"
+                },
+                {
+                  "id": 2,
+                  "name": "Jane Smith"
+                }
+              ],
+              "pagination": {
+                "total": 25,
+                "count": 10,
+                "per_page": 10,
+                "current_page": 1,
+                "total_pages": 3
+              }
+            }
+          }
+        headers: []
+        description: success
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

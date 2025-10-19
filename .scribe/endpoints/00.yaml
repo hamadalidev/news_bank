@@ -1,0 +1,118 @@
+name: 'News Sources'
+description: |-
+
+  APIs for managing news sources
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/sources
+    metadata:
+      groupName: 'News Sources'
+      groupDescription: |-
+
+        APIs for managing news sources
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List news sources'
+      description: 'Get a paginated list of news sources with optional search and sorting capabilities.'
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        name: search
+        description: 'Search term to filter news sources by name.'
+        required: false
+        example: guardian
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      column:
+        name: column
+        description: 'Field to sort by. Must be one of: id, name, status.'
+        required: false
+        example: name
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      dir:
+        name: dir
+        description: 'Sort direction. Must be one of: asc, desc.'
+        required: false
+        example: asc
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      length:
+        name: length
+        description: 'Number of items per page (default: 10).'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      search: guardian
+      column: name
+      dir: asc
+      length: 15
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Success",
+            "data": {
+              "list": [
+                {
+                  "id": 1,
+                  "name": "The Guardian",
+                  "source_enum": "guardian"
+                },
+                {
+                  "id": 2,
+                  "name": "NewsAPI",
+                  "source_enum": "newsapi"
+                },
+                {
+                  "id": 3,
+                  "name": "NewsData.io",
+                  "source_enum": "newsdata_io"
+                }
+              ],
+              "pagination": {
+                "total": 8,
+                "count": 10,
+                "per_page": 10,
+                "current_page": 1,
+                "total_pages": 1
+              }
+            }
+          }
+        headers: []
+        description: success
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
