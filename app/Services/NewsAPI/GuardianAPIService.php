@@ -25,10 +25,11 @@ class GuardianAPIService
         $requestParams = array_merge($defaultParams, $params);
 
         try {
-            $response = Http::timeout(30)->get($source->base_url . 'search', $requestParams);
+            $response = Http::timeout(30)->get($source->base_url.'search', $requestParams);
 
             if ($response->successful()) {
                 $data = $response->json();
+
                 return $this->transformArticles($data['response']['results'] ?? [], $source);
             }
 
@@ -52,7 +53,7 @@ class GuardianAPIService
     {
         return collect($articles)->map(function ($article) use ($source) {
             $fields = $article['fields'] ?? [];
-            
+
             return [
                 'title' => $fields['headline'] ?? $article['webTitle'] ?? '',
                 'description' => $this->extractDescription($fields['body'] ?? ''),
@@ -78,7 +79,8 @@ class GuardianAPIService
 
         // Strip HTML tags and get first 200 characters
         $plainText = strip_tags($body);
-        return strlen($plainText) > 200 ? substr($plainText, 0, 200) . '...' : $plainText;
+
+        return strlen($plainText) > 200 ? substr($plainText, 0, 200).'...' : $plainText;
     }
 
     private function extractCategory(array $article): ?string

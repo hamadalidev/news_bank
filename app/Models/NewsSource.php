@@ -6,13 +6,14 @@ namespace App\Models;
 
 use App\Enums\NewsSourceEnum;
 use App\Models\Base\BaseModel;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class NewsSource extends BaseModel
 {
     use HasFactory;
+
     protected $fillable = [
         'source_enum',
         'name',
@@ -32,7 +33,6 @@ class NewsSource extends BaseModel
     {
         return $this->hasMany(Article::class, 'source_id');
     }
-
 
     protected function apiKey(): Attribute
     {

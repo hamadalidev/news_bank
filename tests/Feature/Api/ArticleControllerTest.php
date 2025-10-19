@@ -30,7 +30,7 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'success',
-                'message', 
+                'message',
                 'data' => [
                     'list' => [
                         '*' => [
@@ -43,16 +43,16 @@ class ArticleControllerTest extends TestCase
                             'source' => ['id', 'name'],
                             'category' => ['id', 'name'],
                             'author' => ['id', 'name'],
-                        ]
+                        ],
                     ],
                     'pagination' => [
                         'total',
                         'count',
                         'per_page',
                         'current_page',
-                        'total_pages'
-                    ]
-                ]
+                        'total_pages',
+                    ],
+                ],
             ]);
 
         $this->assertTrue($response->json('success'));
@@ -234,7 +234,7 @@ class ArticleControllerTest extends TestCase
         $response = $this->getJson(route('api.v1.articles.index', [
             'search' => 'Laravel',
             'category' => $techCategory->id,
-            'author' => $author->id
+            'author' => $author->id,
         ]));
 
         $response->assertStatus(200);

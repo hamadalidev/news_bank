@@ -11,11 +11,9 @@ use App\Repositories\AuthorRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\NewsSourceRepository;
 use App\Services\NewsAPI\GuardianAPIService;
-use App\Services\NewsAPI\NewsDataIOService;
 use App\Services\NewsAPI\NewsAPIService;
-use Illuminate\Support\Collection;
+use App\Services\NewsAPI\NewsDataIOService;
 use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 
 class NewsAggregationService
 {
@@ -53,7 +51,7 @@ class NewsAggregationService
         $params = [];
 
         // If first time fetching, get articles from last 7 days
-        if (!$source->last_fetched_at) {
+        if (! $source->last_fetched_at) {
             if ($source->source_enum === NewsSourceEnum::GUARDIAN) {
                 $params['page-size'] = 50;
             } elseif ($source->source_enum === NewsSourceEnum::NEWSAPI) {
@@ -106,7 +104,7 @@ class NewsAggregationService
                 // Guardian uses 'from-date' parameter (YYYY-MM-DD format)
                 $params['from-date'] = $fromDate->format('Y-m-d');
                 break;
-                
+
             case NewsSourceEnum::NEWSAPI:
                 // NewsAPI uses 'from' parameter (ISO 8601 format)
                 $params['from'] = $fromDate->startOfDay()->format('Y-m-d\TH:i:s\Z');
@@ -121,12 +119,12 @@ class NewsAggregationService
         if (isset($params['from-date'])) {
             return "from {$params['from-date']} (Guardian)";
         }
-        
+
         if (isset($params['from'])) {
             return "from {$params['from']} (NewsAPI)";
         }
 
-        return "latest articles";
+        return 'latest articles';
     }
 
     public function fetchFromSource(NewsSource $source, array $params = []): array
@@ -167,7 +165,7 @@ class NewsAggregationService
 
             return [
                 'success' => false,
-                'message' => 'Failed to fetch articles: ' . $e->getMessage(),
+                'message' => 'Failed to fetch articles: '.$e->getMessage(),
                 'articles_count' => 0,
             ];
         }
@@ -175,7 +173,7 @@ class NewsAggregationService
 
     private function getApiService(NewsSourceEnum $sourceEnum)
     {
-        return match($sourceEnum) {
+        return match ($sourceEnum) {
             NewsSourceEnum::NEWSDATA_IO => $this->newsDataIOService,
             NewsSourceEnum::GUARDIAN => $this->guardianAPIService,
             NewsSourceEnum::NEWSAPI => $this->newsAPIService,
@@ -189,7 +187,7 @@ class NewsAggregationService
             // Check if article already exists
             $existingArticle = $this->articleRepository->first([
                 'external_id' => $articleData['external_id'],
-                'source_id' => $articleData['source_id']
+                'source_id' => $articleData['source_id'],
             ]);
 
             if ($existingArticle) {
@@ -198,14 +196,14 @@ class NewsAggregationService
 
             // Handle category
             $categoryId = null;
-            if (!empty($articleData['category'])) {
+            if (! empty($articleData['category'])) {
                 $category = $this->categoryRepository->updateOrCreate(['name' => $articleData['category']]);
                 $categoryId = $category->id;
             }
 
             // Handle author
             $authorId = null;
-            if (!empty($articleData['author'])) {
+            if (! empty($articleData['author'])) {
                 $author = $this->authorRepository->updateOrCreate(['name' => $articleData['author']]);
                 $authorId = $author->id;
             }

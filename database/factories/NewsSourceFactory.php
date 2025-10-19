@@ -78,7 +78,7 @@ class NewsSourceFactory extends Factory
     {
         return $this->sequence(
             ['source_enum' => NewsSourceEnum::NEWSDATA_IO, 'name' => 'NewsData.io'],
-            ['source_enum' => NewsSourceEnum::GUARDIAN, 'name' => 'The Guardian'], 
+            ['source_enum' => NewsSourceEnum::GUARDIAN, 'name' => 'The Guardian'],
             ['source_enum' => NewsSourceEnum::NEW_YORK_TIMES, 'name' => 'New York Times'],
             ['source_enum' => NewsSourceEnum::NEWSAPI, 'name' => 'NewsAPI']
         );

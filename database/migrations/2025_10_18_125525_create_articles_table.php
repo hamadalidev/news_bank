@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('language', 10)->nullable();
             $table->string('country', 10)->nullable();
             $table->timestamps();
-            
+
             $table->unique(['external_id', 'source_id']);
             $table->index(['published_at', 'source_id']);
             $table->index(['category_id', 'published_at']);

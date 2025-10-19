@@ -93,7 +93,6 @@ abstract class BaseService
         return $this->repository->paginate($perPage, $criteria, $whereIn, $columns, $relations, $orderBy, $orderDirection);
     }
 
-
     public function query()
     {
         return $this->repository->query();

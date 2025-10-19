@@ -92,7 +92,7 @@ class ArticleController extends BaseController
     {
         $requestData = $request->only(['search', 'category', 'author', 'source', 'column', 'dir', 'length']);
         $articles = $this->articleRepository->index($requestData);
-        
+
         return $this->successResponse(
             new ArticleCollection($articles)
         );

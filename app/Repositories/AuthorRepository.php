@@ -14,20 +14,19 @@ class AuthorRepository extends BaseRepository
         return Author::class;
     }
 
-
     public function index(array $request = []): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $columnArray = ['id', 'name'];
         $ascArray = ['desc', 'asc'];
 
         $query = $this->model->query();
-        
+
         if (isset($request['search']) && $request['search']) {
             $query->where('name', 'like', '%'.$request['search'].'%');
         }
 
-        if (isset($request['column']) && isset($request['dir']) && 
-            in_array($request['column'], $columnArray) && 
+        if (isset($request['column']) && isset($request['dir']) &&
+            in_array($request['column'], $columnArray) &&
             in_array($request['dir'], $ascArray)) {
             $query = $query->orderBy($request['column'], $request['dir']);
         } else {

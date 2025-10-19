@@ -7,7 +7,6 @@ namespace App\Repositories;
 use App\Models\Article;
 use App\Repositories\Base\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
 
 class ArticleRepository extends BaseRepository
 {
@@ -15,7 +14,6 @@ class ArticleRepository extends BaseRepository
     {
         return Article::class;
     }
-
 
     public function index(array $request = []): LengthAwarePaginator
     {
@@ -26,9 +24,9 @@ class ArticleRepository extends BaseRepository
 
         // Search functionality
         if (isset($request['search']) && $request['search']) {
-            $query->where(function($q) use ($request) {
+            $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', '%'.$request['search'].'%')
-                  ->orWhere('description', 'like', '%'.$request['search'].'%');
+                    ->orWhere('description', 'like', '%'.$request['search'].'%');
             });
         }
 
@@ -63,5 +61,4 @@ class ArticleRepository extends BaseRepository
 
         return $query->paginate($pageSize);
     }
-
 }

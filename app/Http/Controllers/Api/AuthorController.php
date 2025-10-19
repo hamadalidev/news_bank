@@ -59,7 +59,7 @@ class AuthorController extends BaseController
     {
         $requestData = $request->only(['search', 'column', 'dir', 'length']);
         $authors = $this->authorRepository->index($requestData);
-        
+
         return $this->successResponse(
             new AuthorCollection($authors)
         );

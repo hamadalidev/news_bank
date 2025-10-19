@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 class Category extends BaseModel
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'slug',

@@ -63,7 +63,7 @@ class CategoryController extends BaseController
     {
         $requestData = $request->only(['search', 'column', 'dir', 'length']);
         $categories = $this->categoryRepository->index($requestData);
-        
+
         return $this->successResponse(
             new CategoryCollection($categories)
         );

@@ -66,7 +66,7 @@ class NewsSourceController extends BaseController
     {
         $requestData = $request->only(['search', 'column', 'dir', 'length']);
         $sources = $this->newsSourceRepository->index($requestData);
-        
+
         return $this->successResponse(
             new NewsSourceCollection($sources)
         );

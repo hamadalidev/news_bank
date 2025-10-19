@@ -25,16 +25,16 @@ class AuthorControllerTest extends TestCase
                         '*' => [
                             'id',
                             'name',
-                        ]
+                        ],
                     ],
                     'pagination' => [
                         'total',
                         'count',
                         'per_page',
                         'current_page',
-                        'total_pages'
-                    ]
-                ]
+                        'total_pages',
+                    ],
+                ],
             ]);
 
         $this->assertTrue($response->json('success'));
@@ -123,7 +123,7 @@ class AuthorControllerTest extends TestCase
         $response = $this->getJson(route('api.v1.authors.index', [
             'search' => 'John',
             'column' => 'name',
-            'dir' => 'asc'
+            'dir' => 'asc',
         ]));
 
         $response->assertStatus(200);

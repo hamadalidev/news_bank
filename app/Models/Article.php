@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Base\BaseModel;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
 
 class Article extends BaseModel
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'description',
@@ -48,7 +49,7 @@ class Article extends BaseModel
 
     public function scopeByCategory($query, string $categorySlug)
     {
-        return $query->whereHas('category', function($q) use ($categorySlug) {
+        return $query->whereHas('category', function ($q) use ($categorySlug) {
             $q->where('slug', $categorySlug);
         });
     }
@@ -60,8 +61,8 @@ class Article extends BaseModel
 
     public function scopeByAuthor($query, string $authorName)
     {
-        return $query->whereHas('author', function($q) use ($authorName) {
-            $q->where('name', 'like', '%' . $authorName . '%');
+        return $query->whereHas('author', function ($q) use ($authorName) {
+            $q->where('name', 'like', '%'.$authorName.'%');
         });
     }
 
@@ -80,9 +81,9 @@ class Article extends BaseModel
     public function scopeSearch($query, string $searchTerm)
     {
         return $query->where(function ($q) use ($searchTerm) {
-            $q->where('title', 'like', '%' . $searchTerm . '%')
-              ->orWhere('description', 'like', '%' . $searchTerm . '%')
-              ->orWhere('content', 'like', '%' . $searchTerm . '%');
+            $q->where('title', 'like', '%'.$searchTerm.'%')
+                ->orWhere('description', 'like', '%'.$searchTerm.'%')
+                ->orWhere('content', 'like', '%'.$searchTerm.'%');
         });
     }
 
@@ -91,11 +92,11 @@ class Article extends BaseModel
         if ($from) {
             $query->where('published_at', '>=', Carbon::parse($from));
         }
-        
+
         if ($to) {
             $query->where('published_at', '<=', Carbon::parse($to));
         }
-        
+
         return $query;
     }
 

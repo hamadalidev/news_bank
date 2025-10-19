@@ -32,7 +32,7 @@ class FetchNewsCommand extends Command
 
         try {
             $results = $aggregationService->fetchFromAllEnabledSources();
-            
+
             $this->newLine();
             $this->info('📰 News Fetch Results:');
             $this->newLine();
@@ -41,12 +41,12 @@ class FetchNewsCommand extends Command
             foreach ($results as $source => $result) {
                 $status = $result['success'] ? '✅' : '❌';
                 $this->line("$status $source: {$result['message']}");
-                
+
                 if (isset($result['articles_count'])) {
                     $this->line("   📄 Articles saved: {$result['articles_count']}");
                     $totalArticles += $result['articles_count'];
                 }
-                
+
                 if (isset($result['total_fetched'])) {
                     $this->line("   📡 Articles fetched: {$result['total_fetched']}");
                 }
@@ -54,7 +54,7 @@ class FetchNewsCommand extends Command
                 if (isset($result['date_range'])) {
                     $this->line("   📅 Date range: {$result['date_range']}");
                 }
-                
+
                 $this->newLine();
             }
 
@@ -63,11 +63,11 @@ class FetchNewsCommand extends Command
             return Command::SUCCESS;
 
         } catch (\Exception $e) {
-            $this->error('❌ News fetch failed: ' . $e->getMessage());
+            $this->error('❌ News fetch failed: '.$e->getMessage());
             $this->newLine();
             $this->line('Error details:');
             $this->line($e->getTraceAsString());
-            
+
             return Command::FAILURE;
         }
     }

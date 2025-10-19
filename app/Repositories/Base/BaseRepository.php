@@ -25,7 +25,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         $model = app($this->model());
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new InvalidArgumentException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
@@ -45,13 +45,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
             }
         }
 
-        if (!empty($whereIn)) {
+        if (! empty($whereIn)) {
             foreach ($whereIn as $column => $values) {
                 $query->whereIn($column, $values);
             }
         }
 
-        if (!empty($relations)) {
+        if (! empty($relations)) {
             $query->with($relations);
         }
 
@@ -66,7 +66,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         $query = $this->model->newQuery();
 
-        if (!empty($relations)) {
+        if (! empty($relations)) {
             $query->with($relations);
         }
 
@@ -77,7 +77,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         $query = $this->model->newQuery();
 
-        if (!empty($relations)) {
+        if (! empty($relations)) {
             $query->with($relations);
         }
 
@@ -88,7 +88,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         $query = $this->model->newQuery();
 
-        if (!empty($relations)) {
+        if (! empty($relations)) {
             $query->with($relations);
         }
 
@@ -108,13 +108,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
             }
         }
 
-        if (!empty($whereIn)) {
+        if (! empty($whereIn)) {
             foreach ($whereIn as $column => $values) {
                 $query->whereIn($column, $values);
             }
         }
 
-        if (!empty($relations)) {
+        if (! empty($relations)) {
             $query->with($relations);
         }
 
@@ -143,13 +143,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
             }
         }
 
-        if (!empty($whereIn)) {
+        if (! empty($whereIn)) {
             foreach ($whereIn as $column => $values) {
                 $query->whereIn($column, $values);
             }
         }
 
-        if (!empty($relations)) {
+        if (! empty($relations)) {
             $query->with($relations);
         }
 
@@ -208,7 +208,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
             }
         }
 
-        if (!empty($whereIn)) {
+        if (! empty($whereIn)) {
             foreach ($whereIn as $column => $values) {
                 $query->whereIn($column, $values);
             }
@@ -230,7 +230,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
             }
         }
 
-        if (!empty($whereIn)) {
+        if (! empty($whereIn)) {
             foreach ($whereIn as $column => $values) {
                 $query->whereIn($column, $values);
             }
@@ -252,13 +252,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
             }
         }
 
-        if (!empty($whereIn)) {
+        if (! empty($whereIn)) {
             foreach ($whereIn as $column => $values) {
                 $query->whereIn($column, $values);
             }
         }
 
-        if (!empty($relations)) {
+        if (! empty($relations)) {
             $query->with($relations);
         }
 
@@ -273,7 +273,6 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->newQuery();
     }
-
 
     public function getModel(): Model
     {

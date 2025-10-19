@@ -22,17 +22,18 @@ class NewsDataIOService
         $requestParams = array_merge($defaultParams, $params);
 
         try {
-            $url = $source->base_url . 'latest';
+            $url = $source->base_url.'latest';
             Log::info('NewsData.io API Request', [
                 'url' => $url,
                 'params' => $requestParams,
-                'full_url' => $url . '?' . http_build_query($requestParams)
+                'full_url' => $url.'?'.http_build_query($requestParams),
             ]);
 
             $response = Http::timeout(30)->get($url, $requestParams);
 
             if ($response->successful()) {
                 $data = $response->json();
+
                 return $this->transformArticles($data['results'] ?? [], $source);
             }
 
@@ -74,7 +75,7 @@ class NewsDataIOService
 
     private function extractAuthor(array $article): ?string
     {
-        if (!empty($article['creator'])) {
+        if (! empty($article['creator'])) {
             return is_array($article['creator']) ? implode(', ', $article['creator']) : $article['creator'];
         }
 
@@ -83,7 +84,7 @@ class NewsDataIOService
 
     private function extractCategory(array $article): ?string
     {
-        if (!empty($article['category'])) {
+        if (! empty($article['category'])) {
             return is_array($article['category']) ? $article['category'][0] : $article['category'];
         }
 

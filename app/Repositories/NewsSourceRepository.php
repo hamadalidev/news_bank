@@ -6,7 +6,6 @@ namespace App\Repositories;
 
 use App\Models\NewsSource;
 use App\Repositories\Base\BaseRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 class NewsSourceRepository extends BaseRepository
 {
@@ -14,7 +13,6 @@ class NewsSourceRepository extends BaseRepository
     {
         return NewsSource::class;
     }
-
 
     public function index(array $request = []): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {

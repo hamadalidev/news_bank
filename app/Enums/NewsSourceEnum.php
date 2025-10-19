@@ -13,7 +13,7 @@ enum NewsSourceEnum: string
 
     public function getDisplayName(): string
     {
-        return match($this) {
+        return match ($this) {
             self::NEWSDATA_IO => 'NewsData.io',
             self::GUARDIAN => 'The Guardian',
             self::NEW_YORK_TIMES => 'New York Times',
@@ -23,7 +23,7 @@ enum NewsSourceEnum: string
 
     public function getBaseUrl(): string
     {
-        return match($this) {
+        return match ($this) {
             self::NEWSDATA_IO => 'https://newsdata.io/api/1/',
             self::GUARDIAN => 'https://content.guardianapis.com/',
             self::NEW_YORK_TIMES => 'https://api.nytimes.com/svc/',
@@ -33,7 +33,7 @@ enum NewsSourceEnum: string
 
     public function getDefaultRateLimit(): int
     {
-        return match($this) {
+        return match ($this) {
             self::NEWSDATA_IO => 200,
             self::GUARDIAN => 500,
             self::NEW_YORK_TIMES => 1000,

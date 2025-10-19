@@ -24,11 +24,12 @@ class NewsAPIService
         $requestParams = array_merge($defaultParams, $params);
 
         try {
-            $response = Http::timeout(30)->get($source->base_url . 'top-headlines', $requestParams);
+            $response = Http::timeout(30)->get($source->base_url.'top-headlines', $requestParams);
 
             Log::info($response->body());
             if ($response->successful()) {
                 $data = $response->json();
+
                 return $this->transformArticles($data['articles'] ?? [], $source);
             }
 
@@ -67,7 +68,7 @@ class NewsAPIService
             ];
         })->filter(function ($article) {
             // Filter out articles with missing essential data
-            return !empty($article['title']) && !empty($article['url']);
+            return ! empty($article['title']) && ! empty($article['url']);
         });
     }
 

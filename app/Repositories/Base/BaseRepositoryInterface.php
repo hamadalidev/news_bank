@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repositories\Base;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface BaseRepositoryInterface
 {
@@ -40,7 +40,6 @@ interface BaseRepositoryInterface
     public function count(array $criteria = [], array $whereIn = []): int;
 
     public function paginate(int $perPage = 15, array $criteria = [], array $whereIn = [], array $columns = ['*'], array $relations = [], ?string $orderBy = 'created_at', string $orderDirection = 'desc'): LengthAwarePaginator;
-
 
     public function query(): Builder;
 

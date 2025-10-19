@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Author extends BaseModel
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
     ];

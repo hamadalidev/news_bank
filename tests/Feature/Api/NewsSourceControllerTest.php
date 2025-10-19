@@ -27,16 +27,16 @@ class NewsSourceControllerTest extends TestCase
                             'id',
                             'name',
                             'source_enum',
-                        ]
+                        ],
                     ],
                     'pagination' => [
                         'total',
                         'count',
                         'per_page',
                         'current_page',
-                        'total_pages'
-                    ]
-                ]
+                        'total_pages',
+                    ],
+                ],
             ]);
 
         $this->assertTrue($response->json('success'));
@@ -128,7 +128,7 @@ class NewsSourceControllerTest extends TestCase
         $response = $this->getJson(route('api.v1.sources.index', [
             'search' => 'Daily',
             'column' => 'name',
-            'dir' => 'asc'
+            'dir' => 'asc',
         ]));
 
         $response->assertStatus(200);
@@ -158,7 +158,7 @@ class NewsSourceControllerTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertEquals(4, $response->json('data.pagination.total'));
-        
+
         // Since status is not in the resource, just verify we got 4 sources
         $sources = $response->json('data.list');
         $this->assertCount(4, $sources);
@@ -168,7 +168,7 @@ class NewsSourceControllerTest extends TestCase
     {
         $source = NewsSource::factory()->create([
             'source_enum' => NewsSourceEnum::GUARDIAN,
-            'name' => 'The Guardian'
+            'name' => 'The Guardian',
         ]);
 
         $response = $this->getJson(route('api.v1.sources.index'));
@@ -220,7 +220,7 @@ class NewsSourceControllerTest extends TestCase
 
         $response->assertStatus(200);
         $sourceData = $response->json('data.list.0');
-        
+
         $this->assertEquals($source->id, $sourceData['id']);
         $this->assertEquals('Test Source', $sourceData['name']);
         $this->assertEquals(NewsSourceEnum::NEWSDATA_IO->value, $sourceData['source_enum']);

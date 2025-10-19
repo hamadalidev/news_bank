@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Log;
 
 class FetchNewsArticlesJob implements ShouldQueue
 {
-    use Queueable, InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue, Queueable, SerializesModels;
 
     public int $timeout = 300; // 5 minutes
+
     public int $tries = 3;
 
     /**
@@ -35,9 +36,9 @@ class FetchNewsArticlesJob implements ShouldQueue
 
         try {
             $results = $aggregationService->fetchFromAllEnabledSources();
-            
+
             $totalArticles = array_sum(array_column($results, 'articles_count'));
-            
+
             Log::info('News fetch job completed', [
                 'total_articles_saved' => $totalArticles,
                 'sources_processed' => count($results),
