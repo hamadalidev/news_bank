@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Log;
 
 class NewsAPIService
 {
+    /**
+     * @param NewsSource $source
+     * @param array $params
+     * @return Collection
+     */
     public function fetchLatestNews(NewsSource $source, array $params = []): Collection
     {
         $defaultParams = [
@@ -49,6 +54,11 @@ class NewsAPIService
         }
     }
 
+    /**
+     * @param array $articles
+     * @param NewsSource $source
+     * @return Collection
+     */
     private function transformArticles(array $articles, NewsSource $source): Collection
     {
         return collect($articles)->map(function ($article) use ($source) {
@@ -72,6 +82,10 @@ class NewsAPIService
         });
     }
 
+    /**
+     * @param array $article
+     * @return string|null
+     */
     private function extractCategory(array $article): ?string
     {
         // NewsAPI doesn't provide categories directly,

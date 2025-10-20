@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Log;
 
 class NewsDataIOService
 {
+    /**
+     * @param NewsSource $source
+     * @param array $params
+     * @return Collection
+     */
     public function fetchLatestNews(NewsSource $source, array $params = []): Collection
     {
         $defaultParams = [
@@ -53,6 +58,11 @@ class NewsDataIOService
         }
     }
 
+    /**
+     * @param array $articles
+     * @param NewsSource $source
+     * @return Collection
+     */
     private function transformArticles(array $articles, NewsSource $source): Collection
     {
         return collect($articles)->map(function ($article) use ($source) {
@@ -73,6 +83,10 @@ class NewsDataIOService
         });
     }
 
+    /**
+     * @param array $article
+     * @return string|null
+     */
     private function extractAuthor(array $article): ?string
     {
         if (! empty($article['creator'])) {
@@ -82,6 +96,10 @@ class NewsDataIOService
         return $article['source_id'] ?? null;
     }
 
+    /**
+     * @param array $article
+     * @return string|null
+     */
     private function extractCategory(array $article): ?string
     {
         if (! empty($article['category'])) {

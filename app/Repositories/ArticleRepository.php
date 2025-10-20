@@ -15,6 +15,10 @@ class ArticleRepository extends BaseRepository
         return Article::class;
     }
 
+    /**
+     * @param array $request
+     * @return LengthAwarePaginator
+     */
     public function index(array $request = []): LengthAwarePaginator
     {
         $columnArray = ['id', 'title', 'published_at'];

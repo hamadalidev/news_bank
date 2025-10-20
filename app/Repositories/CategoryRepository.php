@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use App\Repositories\Base\BaseRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CategoryRepository extends BaseRepository
 {
@@ -14,6 +15,10 @@ class CategoryRepository extends BaseRepository
         return Category::class;
     }
 
+    /**
+     * @param array $request
+     * @return LengthAwarePaginator
+     */
     public function index(array $request = []): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $columnArray = ['id', 'name'];

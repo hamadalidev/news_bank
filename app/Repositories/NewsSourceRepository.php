@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\NewsSource;
 use App\Repositories\Base\BaseRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class NewsSourceRepository extends BaseRepository
 {
@@ -14,6 +15,10 @@ class NewsSourceRepository extends BaseRepository
         return NewsSource::class;
     }
 
+    /**
+     * @param array $request
+     * @return LengthAwarePaginator
+     */
     public function index(array $request = []): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $columnArray = ['id', 'name', 'status'];

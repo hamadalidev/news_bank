@@ -13,6 +13,7 @@ use App\Repositories\NewsSourceRepository;
 use App\Services\NewsAPI\GuardianAPIService;
 use App\Services\NewsAPI\NewsAPIService;
 use App\Services\NewsAPI\NewsDataIOService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class NewsAggregationService
@@ -27,6 +28,9 @@ class NewsAggregationService
         private NewsAPIService $newsAPIService,
     ) {}
 
+    /**
+     * @return array
+     */
     public function fetchFromAllEnabledSources(): array
     {
         $sources = $this->newsSourceRepository->get(['status' => 'enabled']);
@@ -46,6 +50,10 @@ class NewsAggregationService
         return $results;
     }
 
+    /**
+     * @param NewsSource $source
+     * @return array
+     */
     private function getSmartFetchParams(NewsSource $source): array
     {
         $params = [];
@@ -92,6 +100,12 @@ class NewsAggregationService
         return $params;
     }
 
+    /**
+     * @param array $params
+     * @param NewsSourceEnum $sourceEnum
+     * @param Carbon $fromDate
+     * @return array
+     */
     private function addDateRangeParams(array $params, NewsSourceEnum $sourceEnum, \Carbon\Carbon $fromDate): array
     {
         switch ($sourceEnum) {
@@ -114,6 +128,10 @@ class NewsAggregationService
         return $params;
     }
 
+    /**
+     * @param array $params
+     * @return string
+     */
     private function getDateRangeInfo(array $params): string
     {
         if (isset($params['from-date'])) {
@@ -127,6 +145,11 @@ class NewsAggregationService
         return 'latest articles';
     }
 
+    /**
+     * @param NewsSource $source
+     * @param array $params
+     * @return array
+     */
     public function fetchFromSource(NewsSource $source, array $params = []): array
     {
         try {
@@ -171,6 +194,10 @@ class NewsAggregationService
         }
     }
 
+    /**
+     * @param NewsSourceEnum $sourceEnum
+     * @return GuardianAPIService|NewsAPIService|NewsDataIOService
+     */
     private function getApiService(NewsSourceEnum $sourceEnum)
     {
         return match ($sourceEnum) {
@@ -181,6 +208,10 @@ class NewsAggregationService
         };
     }
 
+    /**
+     * @param array $articleData
+     * @return bool
+     */
     private function saveArticle(array $articleData): bool
     {
         try {

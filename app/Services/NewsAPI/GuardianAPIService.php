@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Log;
 
 class GuardianAPIService
 {
+    /**
+     * @param NewsSource $source
+     * @param array $params
+     * @return Collection
+     */
     public function fetchLatestNews(NewsSource $source, array $params = []): Collection
     {
         $defaultParams = [
@@ -49,6 +54,11 @@ class GuardianAPIService
         }
     }
 
+    /**
+     * @param array $articles
+     * @param NewsSource $source
+     * @return Collection
+     */
     private function transformArticles(array $articles, NewsSource $source): Collection
     {
         return collect($articles)->map(function ($article) use ($source) {
@@ -71,6 +81,10 @@ class GuardianAPIService
         });
     }
 
+    /**
+     * @param string $body
+     * @return string|null
+     */
     private function extractDescription(string $body): ?string
     {
         if (empty($body)) {
@@ -83,6 +97,10 @@ class GuardianAPIService
         return strlen($plainText) > 200 ? substr($plainText, 0, 200).'...' : $plainText;
     }
 
+    /**
+     * @param array $article
+     * @return string|null
+     */
     private function extractCategory(array $article): ?string
     {
         return $article['sectionName'] ?? $article['pillarName'] ?? null;

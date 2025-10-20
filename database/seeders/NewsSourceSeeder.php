@@ -19,7 +19,7 @@ class NewsSourceSeeder extends Seeder
             [
                 'source_enum' => NewsSourceEnum::NEWSDATA_IO,
                 'name' => NewsSourceEnum::NEWSDATA_IO->getDisplayName(),
-                'api_key' => 'pub_07aaea0264ea47af86479a220aaeacab',
+                'api_key' => 'pub_07aaea0264ea47af86479a220aaeacab', //todo we will replace with orignal keys and UI.
                 'status' => 'enabled',
                 'base_url' => NewsSourceEnum::NEWSDATA_IO->getBaseUrl(),
                 'rate_limit_per_hour' => NewsSourceEnum::NEWSDATA_IO->getDefaultRateLimit(),
