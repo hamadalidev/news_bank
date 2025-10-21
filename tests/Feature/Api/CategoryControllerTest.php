@@ -4,11 +4,12 @@ namespace Tests\Feature\Api;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_can_get_categories_list(): void
     {

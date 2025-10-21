@@ -5,11 +5,12 @@ namespace Tests\Feature\Api;
 use App\Enums\NewsSourceEnum;
 use App\Models\NewsSource;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class NewsSourceControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_can_get_sources_list(): void
     {

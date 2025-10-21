@@ -6,12 +6,12 @@ use App\Models\Article;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\NewsSource;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ArticleControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_can_get_articles_list(): void
     {

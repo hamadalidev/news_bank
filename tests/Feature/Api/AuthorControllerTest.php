@@ -4,11 +4,12 @@ namespace Tests\Feature\Api;
 
 use App\Models\Author;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AuthorControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_can_get_authors_list(): void
     {
